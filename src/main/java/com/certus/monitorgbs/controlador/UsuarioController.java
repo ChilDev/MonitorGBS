@@ -19,7 +19,10 @@ public class UsuarioController {
     //Método GET - Giovani
 
     //Método POST - Dennis
-
+    @PostMapping
+    public Usuario createUser(Usuario user){
+        return usuarioRepository.save(user);
+    }
     //Método UPDATE - Sonny
 
     //Método DELETE - Eddy
