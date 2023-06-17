@@ -17,7 +17,10 @@ public class UsuarioController {
     UsuarioRepository usuarioRepository;
 
     //Método GET - Giovani
-
+    @GetMapping("/usuarios")
+    public List<Usuario> obtenerUsuarios(){
+        return usuarioRepository.findAll();
+    }
     //Método POST - Dennis
 
     //Método UPDATE - Sonny
