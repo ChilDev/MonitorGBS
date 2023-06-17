@@ -23,4 +23,9 @@ public class UsuarioController {
     //Método UPDATE - Sonny
 
     //Método DELETE - Eddy
+    @DeleteMapping("/usuarios/{id}")
+    public void eliminarUsuario(@PathVariable Long id){
+        Usuario usuario = usuarioRepository.findAllById(id);
+        usuarioRepository.delete(usuario);
+    }
 }
