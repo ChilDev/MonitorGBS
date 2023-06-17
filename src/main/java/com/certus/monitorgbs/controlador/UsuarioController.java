@@ -20,7 +20,7 @@ public class UsuarioController {
 
     //Método POST - Dennis
     @PostMapping
-    public Usuario createUser(Usuario user){
+    public Usuario createUser(@RequestBody Usuario user){
         return usuarioRepository.save(user);
     }
     //Método UPDATE - Sonny
