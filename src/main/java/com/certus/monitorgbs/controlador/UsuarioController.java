@@ -1,51 +1,73 @@
 package com.certus.monitorgbs.controlador;
 
 import com.certus.monitorgbs.modelo.Usuario;
-import com.certus.monitorgbs.repositorio.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import com.certus.monitorgbs.servicio.UsuarioServicio;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
-@RequestMapping("/api") //Ruta:localhost:puerto/api
+@Controller
 public class UsuarioController {
 
-    //Usar usuarioRepository para hacer llamado a la interface del repositorio
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioServicio serviceuser;
 
-    //Método GET - Giovani
-    @GetMapping("/usuarios")
-    public List<Usuario> obtenerUsuarios(){
-        return usuarioRepository.findAll();
+
+    @GetMapping("/register")
+    public String mostrarRegistroPage(Model model) {
+        model.addAttribute("registerRequest", new Usuario());
+        return "register_page";
     }
-    //Método POST - Dennis
-    @PostMapping
-    public Usuario createUser(@RequestBody Usuario user){
-        return usuarioRepository.save(user);
+
+    @GetMapping("/login")
+    public String mostrarpaginalogin(Model model) {
+        model.addAttribute("loginRequest", new Usuario());
+        return "login_page";
     }
-    //Método UPDATE - Sonny
-    @PutMapping("/usuarios/{id}")
-    public Optional<Usuario> editarUsuario(@PathVariable Long id, @RequestBody Usuario editarUsuario) {
-        return usuarioRepository.findById(id)
-                .map(usuario -> {
-                    usuario.setNombre(editarUsuario.getNombre());
-                    usuario.setAp_paterno(editarUsuario.getAp_paterno());
-                    usuario.setAp_materno(editarUsuario.getAp_materno());
-                    usuario.setDni(editarUsuario.getDni());
-                    usuario.setCorreo(editarUsuario.getCorreo());
-                    usuario.setTelefono(editarUsuario.getTelefono());
-                    usuario.setUsuario(editarUsuario.getUsuario());
-                    usuario.setPassword(editarUsuario.getPassword());
-                    return usuarioRepository.save(usuario);
-                });
+
+    // metodos deenvio de datos
+    @PostMapping("/register")
+    public String register(@ModelAttribute Usuario usuarios) {
+
+        Usuario registrando = serviceuser.registrarUsuario(usuarios.getNombres(), usuarios.getApellidopaterno(), usuarios.getApellidopaterno(), usuarios.getNombre(), usuarios.getUsuario(), usuarios.getCorreo(), usuarios.getPassword());
+        return registrando == null ? "error_page" : "redirect:/login";
     }
-    //Método DELETE - Eddy
-    @DeleteMapping("/usuarios/{id}")
-    public void eliminarUsuario(@PathVariable Long id){
-        Usuario usuario = usuarioRepository.findAllById(id);
-        usuarioRepository.delete(usuario);
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute Usuario usuarios, Model model) {
+
+        Usuario autenticando = serviceuser.autenticar(usuarios.getNombre(), usuarios.getPassword());
+        if (autenticando != null) {
+            Usuario obtener = serviceuser.obtenerUsuarioRegistrado();
+            model.addAttribute("apellidop", obtener.getApellidopaterno());
+            model.addAttribute("apellidom", obtener.getApellidomaterno());
+            model.addAttribute("nombrees", obtener.getNombres());
+            model.addAttribute("dnis", obtener.getUsuario());
+            model.addAttribute("correous", obtener.getCorreo());
+            model.addAttribute("userLogin", autenticando.getNombre());
+
+            return "perfil_page";
+        } else {
+            return "error_page";
+        }
+    }
+
+    @GetMapping("/perfil")
+    public String mostrarPerfil(Model model) {
+        Usuario usuarioRegistrado = serviceuser.obtenerUsuarioRegistrado();
+
+        if (usuarioRegistrado != null) {
+            model.addAttribute("apellidop", usuarioRegistrado.getApellidopaterno());
+            model.addAttribute("apellidom", usuarioRegistrado.getApellidomaterno());
+            model.addAttribute("nombrees", usuarioRegistrado.getNombres());
+            model.addAttribute("dnis", usuarioRegistrado.getUsuario());
+            model.addAttribute("correous", usuarioRegistrado.getCorreo());
+            model.addAttribute("userLogin", usuarioRegistrado.getNombre());
+            return "perfil_page";
+        } else {
+            return "error_page";
+        }
     }
 }
+

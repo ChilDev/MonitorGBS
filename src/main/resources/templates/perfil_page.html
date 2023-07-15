@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>perfil de usuario</title>
+    <link rel="stylesheet" href="static/estilos/perfil.css" th:href="@{/estilos/perfil.css}">
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' th:href="@{https://fonts.googleapis.com/css?family=Righteous}">
+
+</head>
+<body>
+<header class="header">
+    <img id="title" class="logocabeza" src="static/imagenes/LOGOCOMPLETOBLANCO.png" th:src="@{/imagenes/LOGOCOMPLETOBLANCO.png}">
+
+</header>
+<main>
+
+    <form id="FORMGBS">
+        <div class="Monitor"> <img id="logoInvertido" th:src="@{/imagenes/LOGOPEQUEÑOAZUL.png}" src="static/imagenes/LOGOPEQUEÑOAZUL.png"alt="">
+            <h1>Mis datos</h1>
+            <img src="static/imagenes/ICON.png" th:src="@{/imagenes/ICON.png}" id="ICON">
+            <H4>EDIT </H4>
+        </div>
+        <div class="PADRE">
+            <div id="divperfil">
+
+                <img src="static/imagenes/añadir foto.PNG"  th:src="@{/imagenes/añadir foto.PNG}" id="imgPerfil" onclick="seleccionarArchivo()">
+            </div>
+            <DIV class="RIGHT">
+
+                <div class="form-group">
+                    <label id="name-label">Nombres</label>
+                    <input  th:value="${nombrees}" id="name" class="form-control"  />
+                    <label class="password">Apellido Paterno</label>
+                    <input th:value="${apellidop}" id="contras" class="form-control" />
+                    <label>Apellido Materno</label>
+                    <input th:value="${apellidom}" class="form-control" >
+
+                </div>
+            </DIV>
+            <DIV class="LEFT">
+                <LABEL>usuario</LABEL>
+                <input  th:value="${userLogin}" class="form-control" >
+                <label>DNI</label>
+                <input  th:value="${dnis}" class="form-control" >
+                <label>Correo</label>
+                <input th:value="${correous}" class="form-control">
+
+            </DIV>
+
+        </div>
+        <div class="form-group" id="idbuttom">
+            <a href="/"  id="submit" class="submit-button">
+                Regresar
+            </a>
+        </div>
+    </form>
+
+</main>
+
+<script>function seleccionarArchivo() {
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.click();
+
+                input.addEventListener('change', function () {
+                    var archivo = input.files[0];
+                    console.log(archivo);
+                });
+            }
+        </script>
+
+</body>
+</html>

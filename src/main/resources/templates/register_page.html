@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="static/estilos/styles.css" th:href="@{/estilos/styles.css}">
+    <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' th:href="@{https://fonts.googleapis.com/css?family=Righteous}">
+</head>
+<body>
+<header class="header">
+    <img id="title" class="logocabeza"  src="static/imagenes/LOGOCOMPLETOBLANCO.png" th:src="@{/imagenes/LOGOCOMPLETOBLANCO.png}">
+
+</header>
+<main>
+    <form id="FORMGBS" method="post" action="/register" th:object="${registerRequest}">
+        <div class="Monitor"> <img id="logoInvertido" th:src="@{/imagenes/LOGOPEQUEÑOAZUL.png}" src="static/imagenes/LOGOPEQUEÑOAZUL.png">
+            <h1>Monitor GBS</h1>
+            <img th:src="@{imagenes/user.png}" src="static/imagenes/user.png" id="logoInvertido" class="user" >
+        </div>
+        <div class="PADRE">
+            <DIV class="RIGHT">
+                <div class="form-group">
+                    <label id="name-label">Nombres</label>
+                    <input name="nombres"   th:field="*{nombres}"required type="text" id="name" class="form-control" placeholder="   Coloca tu usuario"  />
+
+
+                    <label class="password">Apellido Paterno</label>
+                    <input name="apellidopaterno"  th:field="*{apellidopaterno}" required id="contras" class="form-control" placeholder="   *************" />
+                    <label>Apellido Materno</label>
+                    <input name="apellidomaterno"   th:field="*{apellidomaterno}"required class="form-control" >
+                    <label>DNI</label>
+                    <input type="number" name="usuario"  th:field="*{usuario}" required   class="form-control" th:attr="max=99999999">
+                    <label>Correo</label>
+                    <input type="email" name="correo"  th:field="*{correo}"   class="form-control">
+                </div>
+            </DIV>
+            <DIV class="LEFT">
+                <LABEL>usuario</LABEL>
+                <input name="nombre"  th:field="*{nombre}" required type="text" class="form-control">
+                <label >Contraseña</label>
+                <input type="password" name="password" th:field="*{password}" required class="form-control" ><BR><BR><br>
+
+                <br><br>
+
+                <div class="form-group">
+                    <button type="submit" name="sign-in" id="submit" class="submit-button">
+                        Registrarse
+                    </button>
+                    <a href="/">Regresar al inicio</a>
+                </div>
+
+            </DIV></div>
+
+    </form>
+
+</main>
+
+
+<footer>
+    <div id="copyri">
+        <p>© 2023-2023 GBSolutions.com.Inc y sus afiliados</p>
+        <a href="google.com">Terminos y condiciones</a>
+    </div>
+</footer>
+</body>
+</html>
