@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PAGINA DEL LOGIN</title>
+  <link rel="stylesheet" href="static/estilos/login.css" th:href="@{/estilos/login.css}">
+  <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' th:href="@{https://fonts.googleapis.com/css?family=Righteous}">
+
+</head>
+<body>
+<header class="header">
+  <img  src="static/imagenes/LOGOCOMPLETOBLANCO.png" th:src="@{/imagenes/LOGOCOMPLETOBLANCO.png}"id="title" class="logocabeza">
+
+</header>
+<main>
+  <form id="FORMGBS" method="post" action="/login" th:object="${loginRequest}" >
+    <div class="Monitor"> <img src="static/imagenes/LOGOPEQUEÑOAZUL.png"   th:src="@{/imagenes/LOGOPEQUEÑOAZUL.png}"id="logoInvertido"><h1>Monitor GBS</h1></div>
+    <div class="form-group">
+      <label id="name-label" >Usuario</label>
+      <input  th:field="*{nombre}" type="text" name="nombre"   id="name" class="form-control" placeholder="   Coloca tu usuario"  required/>
+    </div>
+    <div class="Contraseña">
+
+      <label class="password" >Contraseña <span class="clue">Olvidaste tu contraseña?</span></label>
+      <input th:field="*{password}" type="password" name="password" placeholder="Password" required  id="contras" class="form-control" >
+    </div>
+    <div class="form-group">
+      <button type="submit" id="submit" class="submit-button" name="sign-in" value="Login">
+        Iniciar sesion
+      </button>
+    </div>
+  </form>
+
+</main>
+</body>
+<footer>
+  <div id="copyri">
+    <a href="/register">ir al registro</a>
+    <p >© 2023-2023 GBSolutions.com.Inc y sus afiliados</p>
+    <a href="google.com">Terminos y condiciones</a>
+  </div>
+</footer>
+</html>
