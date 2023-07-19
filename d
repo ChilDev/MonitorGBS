@@ -41,3 +41,9 @@ Author: ChilDev <76248649@certus.edu.pe>
 Date:   Fri Jun 16 20:29:16 2023 -0500
 
     Primer commit
+* [32m(HEAD detached at origin/develop)[m
+  develop[m
+  feature_2[m
+  feature_eddy[m
+  mai[m
+  main[m
